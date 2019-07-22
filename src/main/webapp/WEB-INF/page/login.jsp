@@ -23,7 +23,7 @@
 				<div class="row clearfix">
 					<label class="form-label col-xs-3"><i class="Hui-iconfont">&#xe60d;</i></label>
 					<div class="form-controls col-xs-8">
-						<input id="" name="name" type="text" placeholder="账户" class="input-text size-L">
+						<input id="" name="username" type="text" placeholder="账户" class="input-text size-L">
 					</div>
 				</div>
 				<div class="row clearfix">

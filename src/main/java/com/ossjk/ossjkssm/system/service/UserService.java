@@ -10,12 +10,12 @@ import com.ossjk.ossjkssm.system.entity.User;
 public interface UserService extends BaseService<User> {
     /**
      * 登录
-     * @param name
+     * @param username
      * @return
      */
-	User selectByName(String name);
+	User selectByName(String username);
 
-	Page<User> selectPage(Page page,String name);
+	Page<User> selectPage(Page page,String username);
 
 	int batchDelete(Integer[] ids);
 

@@ -52,9 +52,7 @@ public class IndenContrller extends BaseController {
 
 	/**
 	 * 登出
-	 * 
-	 * @param req
-	 * @param resp
+	 *
 	 */
 	@RequestMapping("/logout")
 	public String logout(HttpSession session) {
@@ -65,12 +63,11 @@ public class IndenContrller extends BaseController {
 	/**
 	 * 登出
 	 * 
-	 * @param req
-	 * @param resp
+
 	 */
 	@RequestMapping("/login")
-	public String login(String name, String pwd, ModelMap map, HttpSession session) {
-		User user = userService.selectByName(name);
+	public String login(String username, String pwd, ModelMap map, HttpSession session) {
+		User user = userService.selectByName(username);
 		if (!CommonUtil.isBlank(user)) {
 			if (CommonUtil.isEquals(user.getPwd(), pwd)) {
 				session.setAttribute(Constant.SESSION_USER_KEY, user);

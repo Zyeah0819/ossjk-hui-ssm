@@ -15,14 +15,14 @@
 						<div class="row clearfix">
 							<div class="col-xs-12 col-sm-6 col-md-4">
 								<div class="row clearfix mb-10">
-									<span class="col-xs-4 form-item-label">姓名：</span> <span class="col-xs-4 form-item-control"> <input type="text" name="name"   value="${requestScope.page.prams.name }" placeholder="" class="input-text" />
+									<span class="col-xs-3 form-item-label">姓名：</span> <span class="col-xs-8 form-item-control"> <input type="text" name="username"   value="${requestScope.page.prams.username }" placeholder="" class="input-text" />
 									</span>
 								</div>
 							</div>
 							<input type="hidden" name="method" value="list">
 							<div class="col-xs-12 col-sm-6 col-md-4">
 								<div class="row clearfix">
-									<span class="col-xs-4 form-item-control">
+									<span class="col-xs-2 form-item-control">
 										<button name="" id="search-submit" class="btn btn-success radius" type="submit">
 											<i class="Hui-iconfont">&#xe665;</i> 搜索
 										</button>
@@ -49,6 +49,8 @@
 								<tr class="text-c">
 									<th width="25"><input type="checkbox" name="" value=""></th>
 									<th>姓名</th>
+									<th>部门</th>
+									<th>角色</th>
 									<th>性别</th>
 									<th>生日</th>
 									<th>电话</th>
@@ -60,7 +62,9 @@
 								<c:forEach items="${requestScope.page.records }" var="record">
 									<tr class="text-c">
 										<td><input type="checkbox" value="${record.id }" class="checkbox-box"></td>
-										<td>${record.name }</td>
+										<td>${record.username }</td>
+										<td>${record.organizationName }</td>
+										<td>${record.roleName }</td>
 										<td>${record.sex }</td>
 										<td>${record.birth }</td>
 										<td>${record.phone }</td>

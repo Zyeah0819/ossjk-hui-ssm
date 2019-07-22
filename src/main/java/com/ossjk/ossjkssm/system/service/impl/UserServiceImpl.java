@@ -16,15 +16,15 @@ import com.ossjk.ossjkssm.system.service.UserService;
 public class UserServiceImpl extends BaseServiceImpl<UserMapper, User> implements UserService {
 
 	@Override
-	public User selectByName(String name) {
-		return baseMapper.selectByName(name);
+	public User selectByName(String username) {
+		return baseMapper.selectByName(username);
 	}
 
 
 	@Override
-	public Page<User> selectPage(Page page,String name) {
+	public Page<User> selectPage(Page page,String username) {
 		PageHelper.startPage(page.getPageNum(), page.getPageSize());
-		page.toPage(new PageInfo(baseMapper.selectAll(name)));
+		page.toPage(new PageInfo(baseMapper.selectAll(username)));
 		return page;
 	}
 

@@ -8,7 +8,7 @@
 		<id column="id" property="id" jdbcType="INTEGER" />
 		<result column="rid" property="rid" jdbcType="INTEGER" />
 		<result column="ogid" property="ogid" jdbcType="INTEGER" />
-		<result column="name" property="name" jdbcType="VARCHAR" />
+		<result column="username" property="username" jdbcType="VARCHAR" />
 		<result column="pwd" property="pwd" jdbcType="VARCHAR" />
 		<result column="sex" property="sex" jdbcType="DECIMAL" />
 		<result column="birth" property="birth" jdbcType="VARCHAR" />
@@ -18,11 +18,62 @@
 		<result column="loginip" property="loginip" jdbcType="VARCHAR" />
 		<result column="crtm" property="crtm" jdbcType="TIMESTAMP" />
 		<result column="mdtm" property="mdtm" jdbcType="TIMESTAMP" />
+
+        <!--最简单的映射，在sql语句中使用as语句就好-->
+        <result column="oname" property="oname" jdbcType="VARCHAR" />
+        <result column="rname" property="rname" jdbcType="VARCHAR" />
+
+<!--	这种映射要在用到的数据库数据没有多表同名的情况下才能够正常使用，同名了会分不清到底使用哪个。
+		所以，设计数据库时，数据名尽量把前缀带上，这样可以避免很多的错误。
+        <association property="organization" column="ogid" resultMap="com.ossjk.ossjkssm.system.mapper.OrganizationMapper.BaseResultMap"></association>
+		<association property="role" column="rid" resultMap="com.ossjk.ossjkssm.system.mapper.RoleMapper.BaseResultMap"></association>-->
 	</resultMap>
 	<sql id="Base_Column_List">
-		id, rid, ogid, name, pwd, sex, birth, phone, email, logintime, loginip, crtm, mdtm
+		id, rid, ogid, username, pwd, sex, birth, phone, email, logintime, loginip, crtm, mdtm
 	</sql>
-	<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    <update id="updateByPrimaryKey" parameterType="com.ossjk.ossjkssm.system.entity.User">
+		update user
+		set rid = #{rid,jdbcType=INTEGER},
+		ogid = #{ogid,jdbcType=INTEGER},
+		username = #{username,jdbcType=VARCHAR},
+		pwd = #{pwd,jdbcType=VARCHAR},
+		sex = #{sex,jdbcType=DECIMAL},
+		birth = #{birth,jdbcType=VARCHAR},
+		phone = #{phone,jdbcType=VARCHAR},
+		email = #{email,jdbcType=VARCHAR},
+		logintime = #{logintime,jdbcType=VARCHAR},
+		loginip = #{loginip,jdbcType=VARCHAR},
+		crtm = #{crtm,jdbcType=TIMESTAMP},
+		mdtm = #{mdtm,jdbcType=TIMESTAMP}
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+
+
+    <!--登录-->
+    <select id="selectByName" resultType="com.ossjk.ossjkssm.system.entity.User">
+		select * from user u where username = #{username}
+	</select>
+
+    <!--带条件的查询全部数据-->
+    <select id="selectAll"  resultMap="BaseResultMap">
+		select u.*,organizationName,roleName  from user u,organization o,role r
+        <trim prefix="where" prefixOverrides="and|or">
+            u.ogid = o.id and u.rid = r.id
+            <if test="username!=null and username!=''">
+                AND username LIKE CONCAT('%',#{username},'%')
+            </if>
+        </trim>
+	</select>
+
+    <!-- 批量删除 -->
+    <delete id="batchDelete">
+        delete from user where id in
+        <foreach collection="array" item="id" index="no" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
 		select
 		<include refid="Base_Column_List" />
 		from user
@@ -34,12 +85,12 @@
 	</delete>
 	<insert id="insert" parameterType="com.ossjk.ossjkssm.system.entity.User">
 		insert into user (id, rid, ogid,
-		name, pwd, sex, birth,
+		username, pwd, sex, birth,
 		phone, email, logintime,
 		loginip, crtm, mdtm
 		)
 		values (#{id,jdbcType=INTEGER}, #{rid,jdbcType=INTEGER}, #{ogid,jdbcType=INTEGER},
-		#{name,jdbcType=VARCHAR}, #{pwd,jdbcType=VARCHAR}, #{sex,jdbcType=DECIMAL}, #{birth,jdbcType=VARCHAR},
+		#{username,jdbcType=VARCHAR}, #{pwd,jdbcType=VARCHAR}, #{sex,jdbcType=DECIMAL}, #{birth,jdbcType=VARCHAR},
 		#{phone,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{logintime,jdbcType=VARCHAR},
 		#{loginip,jdbcType=VARCHAR}, #{crtm,jdbcType=TIMESTAMP}, #{mdtm,jdbcType=TIMESTAMP}
 		)
@@ -171,45 +222,5 @@
 		</set>
 		where id = #{id,jdbcType=INTEGER}
 	</update>-->
-	<update id="updateByPrimaryKey" parameterType="com.ossjk.ossjkssm.system.entity.User">
-		update user
-		set rid = #{rid,jdbcType=INTEGER},
-		ogid = #{ogid,jdbcType=INTEGER},
-		name = #{name,jdbcType=VARCHAR},
-		pwd = #{pwd,jdbcType=VARCHAR},
-		sex = #{sex,jdbcType=DECIMAL},
-		birth = #{birth,jdbcType=VARCHAR},
-		phone = #{phone,jdbcType=VARCHAR},
-		email = #{email,jdbcType=VARCHAR},
-		logintime = #{logintime,jdbcType=VARCHAR},
-		loginip = #{loginip,jdbcType=VARCHAR},
-		crtm = #{crtm,jdbcType=TIMESTAMP},
-		mdtm = #{mdtm,jdbcType=TIMESTAMP}
-		where id = #{id,jdbcType=INTEGER}
-	</update>
-
-
-<!--登录-->
-	<select id="selectByName" resultType="com.ossjk.ossjkssm.system.entity.User">
-		select * from user u where name = #{name}
-	</select>
-
-<!--带条件的查询全部数据-->
-	<select id="selectAll" resultType="com.ossjk.ossjkssm.system.entity.User">
-		select * from user u
-		<trim prefix="where" prefixOverrides="and|or">
-			<if test="name!=null and name!=''">
-				AND name LIKE CONCAT('%',#{name},'%')
-			</if>
-		</trim>
-	</select>
-
-	<!-- 批量删除 -->
-	<delete id="batchDelete">
-		delete from user where id in
-		<foreach collection="array" item="id" index="no" open="(" separator="," close=")">
-			#{id}
-		</foreach>
-	</delete>
 
 </mapper>

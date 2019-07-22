@@ -11,7 +11,7 @@ public class User extends BaseEntity {
 
 	private Integer ogid;
 
-	private String name;
+	private String username;
 
 	private String pwd;
 
@@ -26,6 +26,29 @@ public class User extends BaseEntity {
 	private String logintime;
 
 	private String loginip;
+
+/*	这种映射要在用到的数据库数据没有多表同名的情况下才能够正常使用
+	private Organization organization;
+	private Role role;*/
+
+	private String organizationName;
+	private String roleName;
+
+	public String getOrganizationName() {
+		return organizationName;
+	}
+
+	public void setOrganizationName(String organizationName) {
+		this.organizationName = organizationName;
+	}
+
+	public String getRoleName() {
+		return roleName;
+	}
+
+	public void setRoleName(String roleName) {
+		this.roleName = roleName;
+	}
 
 	public Integer getRid() {
 		return rid;
@@ -43,12 +66,12 @@ public class User extends BaseEntity {
 		this.ogid = ogid;
 	}
 
-	public String getName() {
-		return name;
+	public String getUsername() {
+		return username;
 	}
 
-	public void setName(String name) {
-		this.name = name == null ? null : name.trim();
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 	public String getPwd() {

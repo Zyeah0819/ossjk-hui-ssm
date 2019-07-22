@@ -24,8 +24,8 @@ public class UserController extends BaseController {
 	 * 列表
 	 */
 	@RequestMapping("/list")
-	public String list(String name,Page page, ModelMap map) {
-		map.put("page", userService.selectPage(page,name));
+	public String list(String username,Page page, ModelMap map) {
+		map.put("page", userService.selectPage(page,username));
 		return "system/user/list";
 	}
 
