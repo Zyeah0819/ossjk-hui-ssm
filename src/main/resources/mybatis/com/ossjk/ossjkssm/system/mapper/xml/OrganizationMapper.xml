@@ -15,5 +15,9 @@
     <sql id="Base_Column_List">
 		id, organizationName, remarks, sort, crtm, mdtm
 	</sql>
+    <!--查询organization表的所有数据-->
+    <select id="selectAll" resultType="com.ossjk.ossjkssm.system.entity.Organization">
+        select * from organization o
+    </select>
 
 </mapper>

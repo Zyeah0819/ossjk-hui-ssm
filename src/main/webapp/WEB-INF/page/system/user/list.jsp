@@ -15,7 +15,7 @@
 						<div class="row clearfix">
 							<div class="col-xs-12 col-sm-6 col-md-4">
 								<div class="row clearfix mb-10">
-									<span class="col-xs-3 form-item-label">姓名：</span> <span class="col-xs-8 form-item-control"> <input type="text" name="username"   value="${requestScope.page.prams.username }" placeholder="" class="input-text" />
+									<span class="col-xs-3 form-item-label">姓名：</span> <span class="col-xs-8 form-item-control"> <input type="text" name="username"   value="${requestScope.username }" placeholder="" class="input-text" />
 									</span>
 								</div>
 							</div>

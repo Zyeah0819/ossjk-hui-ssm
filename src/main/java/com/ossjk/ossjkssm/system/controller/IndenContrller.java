@@ -70,6 +70,8 @@ public class IndenContrller extends BaseController {
 		User user = userService.selectByName(username);
 		if (!CommonUtil.isBlank(user)) {
 			if (CommonUtil.isEquals(user.getPwd(), pwd)) {
+				//记录上一次登录时间
+				userService.logintime(username);
 				session.setAttribute(Constant.SESSION_USER_KEY, user);
 				return "redirect:/system/toIndex.do";
 			} else {

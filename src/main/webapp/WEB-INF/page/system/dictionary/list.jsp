@@ -16,7 +16,7 @@
 						<div class="row clearfix">
 							<div class="col-xs-12 col-sm-6 col-md-4">
 								<div class="row clearfix mb-10">
-									<span class="col-xs-4 form-item-label">键值：</span> <span class="col-xs-4 form-item-control"> <input type="text" name="dkey"   value="${requestScope.page.prams.dkey }" placeholder="" class="input-text" />
+									<span class="col-xs-4 form-item-label">键值：</span> <span class="col-xs-4 form-item-control"> <input type="text" name="dkey"   value="${requestScope.dkey }" placeholder="" class="input-text" />
 									</span>
 								</div>
 							</div>

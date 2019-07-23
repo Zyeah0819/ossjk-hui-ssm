@@ -1,9 +1,12 @@
 package com.ossjk.ossjkssm.system.controller;
 
+import com.ossjk.ossjkssm.system.service.OrganizationService;
+import com.ossjk.ossjkssm.system.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ossjk.core.base.controller.BaseController;
@@ -13,18 +16,29 @@ import com.ossjk.ossjkssm.common.Constant;
 import com.ossjk.ossjkssm.system.entity.User;
 import com.ossjk.ossjkssm.system.service.UserService;
 
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+
 @Controller
 @RequestMapping("/system/user")
 public class UserController extends BaseController {
 
 	@Autowired
 	private UserService userService;
-
+	@Autowired
+	private RoleService roleService;
+	@Autowired
+	private OrganizationService organizationService;
 	/**
 	 * 列表
 	 */
 	@RequestMapping("/list")
 	public String list(String username,Page page, ModelMap map) {
+		//搜索条件回显
+		map.put("username", username);
 		map.put("page", userService.selectPage(page,username));
 		return "system/user/list";
 	}
@@ -33,7 +47,9 @@ public class UserController extends BaseController {
 	 * 去增加
 	 */
 	@RequestMapping("/toInsert")
-	public String toInsert() {
+	public String toInsert(ModelMap map) {
+		map.put("roles",roleService.selectAll());
+		map.put("organizations",organizationService.selectAll());
 		return "system/user/edit";
 	}
 
@@ -42,6 +58,8 @@ public class UserController extends BaseController {
 	 */
 	@RequestMapping("/toUpdate")
 	public String toUpdate(Integer id, ModelMap map) {
+		map.put("roles",roleService.selectAll());
+		map.put("organizations",organizationService.selectAll());
 		map.put("record", userService.selectByPrimaryKey(id));
 		return "system/user/edit";
 	}
@@ -98,4 +116,6 @@ public class UserController extends BaseController {
 			return new AjaxReturn(Constant.RETURN_CODE_ERROR, Constant.RETURN_MESSAGE_ERROR);
 		}
 	}
+
+
 }

@@ -20,6 +20,11 @@ public class UserServiceImpl extends BaseServiceImpl<UserMapper, User> implement
 		return baseMapper.selectByName(username);
 	}
 
+	@Override
+	public int logintime(String username) {
+		return baseMapper.logintime(username);
+	}
+
 
 	@Override
 	public Page<User> selectPage(Page page,String username) {
