@@ -1,6 +1,5 @@
 package com.ossjk.ossjkssm.system.mapper;
 
-import java.io.Serializable;
 import java.util.List;
 
 import com.ossjk.core.base.mapper.BaseMapper;
@@ -15,12 +14,15 @@ public interface UserMapper extends BaseMapper<User> {
 	 */
 	User selectByName(String username);
 
-	/**
-	 * 记录上一次登录时间
-	 * @param username
-	 * @return
-	 */
-	int logintime(String username);
+
+    /**
+     * 记录登录时间和ip
+     * @param username
+     * @param loginip
+     * @return
+     */
+	int loginipAndtime(@Param(value = "username") String username,@Param(value = "loginip") String loginip);
+
 	/**
 	 * 查询user表数据，带条件
 	 * @param username

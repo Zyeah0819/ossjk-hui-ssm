@@ -15,12 +15,13 @@ public interface UserService extends BaseService<User> {
      */
 	User selectByName(String username);
 
-	/**
-	 * 记录上次登录的时间
-	 * @param username
-	 * @return
-	 */
-	int logintime(String username);
+    /**
+     * 登录时间和ip
+     * @param username
+     * @param loginip
+     * @return
+     */
+	int loginipAndtime(String username,String loginip);
 
 	/**分页显示数据，带查询条件
 	 *

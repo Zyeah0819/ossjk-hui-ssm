@@ -1,5 +1,7 @@
 package com.ossjk.ossjkssm.system.controller;
 
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +14,10 @@ import com.ossjk.core.util.CommonUtil;
 import com.ossjk.ossjkssm.common.Constant;
 import com.ossjk.ossjkssm.system.entity.User;
 import com.ossjk.ossjkssm.system.service.UserService;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 
 @Controller
 @RequestMapping("/system")
@@ -66,12 +72,61 @@ public class IndenContrller extends BaseController {
 
 	 */
 	@RequestMapping("/login")
-	public String login(String username, String pwd, ModelMap map, HttpSession session) {
+	public String login(String username, String pwd, ModelMap map, HttpSession session, HttpServletRequest request) {
+
+		//获取登录ip地址
+			String ip = request.getHeader("X-Forwarded-For");
+			if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+				if (ip == null || ip.length() == 0
+						|| "unknown".equalsIgnoreCase(ip)) {
+					ip = request.getHeader("Proxy-Client-IP");
+				}
+				if (ip == null || ip.length() == 0
+						|| "unknown".equalsIgnoreCase(ip)) {
+					ip = request.getHeader("WL-Proxy-Client-IP");
+				}
+				if (ip == null || ip.length() == 0
+						|| "unknown".equalsIgnoreCase(ip)) {
+					ip = request.getHeader("HTTP_CLIENT_IP");
+				}
+				if (ip == null || ip.length() == 0
+						|| "unknown".equalsIgnoreCase(ip)) {
+					ip = request.getHeader("HTTP_X_FORWARDED_FOR");
+				}
+				if (ip == null || ip.length() == 0
+						|| "unknown".equalsIgnoreCase(ip)) {
+					ip = request.getRemoteAddr();
+				}
+				if (ip.equals("0:0:0:0:0:0:0:1")) {
+					ip = "本地";
+				}
+			} else if (ip.length() > 15) {
+				String[] ips = ip.split(",");
+				for (int index = 0; index < ips.length; index++) {
+					String strIp = (String) ips[index];
+					if (!("unknown".equalsIgnoreCase(strIp))) {
+						ip = strIp;
+						break;
+					}
+				}
+			}
+			if (ip.equals("127.0.0.1")) {
+				InetAddress inetAddress = null;
+				try {
+					inetAddress = InetAddress.getLocalHost();
+				} catch (UnknownHostException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				ip = inetAddress.getHostAddress();
+			}
+
 		User user = userService.selectByName(username);
 		if (!CommonUtil.isBlank(user)) {
 			if (CommonUtil.isEquals(user.getPwd(), pwd)) {
-				//记录上一次登录时间
-				userService.logintime(username);
+				//记录上一次登录的时间和ip
+				userService.loginipAndtime(username,ip);
+				System.out.println("ip"+ip);
 				session.setAttribute(Constant.SESSION_USER_KEY, user);
 				return "redirect:/system/toIndex.do";
 			} else {
