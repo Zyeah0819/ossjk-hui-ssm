@@ -34,7 +34,17 @@ public class User extends BaseEntity {
 	private String organizationName;
 	private String roleName;
 
-	public String getOrganizationName() {
+	private String mdby;
+
+    public String getMdby() {
+        return mdby;
+    }
+
+    public void setMdby(String mdby) {
+        this.mdby = mdby;
+    }
+
+    public String getOrganizationName() {
 		return organizationName;
 	}
 

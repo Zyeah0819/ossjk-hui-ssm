@@ -15,6 +15,7 @@
 					<!-- 隐藏表单 -->
 					<c:if test="${requestScope.record != null }">
 						<input type="hidden" name="id" value="${requestScope.record.id }">
+						<input type="hidden" name="mdby" value="${sessionScope.user.username}">
 					</c:if>
 					<div class="row clearfix">
 						<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>姓名：</label>

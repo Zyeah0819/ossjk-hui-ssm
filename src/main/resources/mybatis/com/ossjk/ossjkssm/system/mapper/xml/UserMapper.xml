@@ -18,6 +18,7 @@
 		<result column="email" property="email" jdbcType="VARCHAR" />
 		<result column="logintime" property="logintime" jdbcType="VARCHAR" />
 		<result column="loginip" property="loginip" jdbcType="VARCHAR" />
+		<result column="mdby" property="mdby" jdbcType="VARCHAR" />
 		<result column="crtm" property="crtm" jdbcType="TIMESTAMP" />
 		<result column="mdtm" property="mdtm" jdbcType="TIMESTAMP" />
 
@@ -31,7 +32,7 @@
 		<association property="role" column="rid" resultMap="com.ossjk.ossjkssm.system.mapper.RoleMapper.BaseResultMap"></association>-->
 	</resultMap>
 	<sql id="Base_Column_List">
-		id, rid, ogid, username, pwd, sex, birth, phone, email, logintime, loginip, crtm, mdtm
+		id, rid, ogid, username, pwd, sex, birth, phone, email, logintime, loginip,mdby, crtm, mdtm
 	</sql>
 
 	<!--根据id更新数据-->
@@ -47,6 +48,7 @@
 		email = #{email,jdbcType=VARCHAR},
 		logintime = #{logintime,jdbcType=VARCHAR},
 		loginip = #{loginip,jdbcType=VARCHAR},
+		mdby = #{mdby,jdbcType=VARCHAR},
 		crtm = #{crtm,jdbcType=TIMESTAMP},
 		mdtm = NOW()
 		where id = #{id,jdbcType=INTEGER}
