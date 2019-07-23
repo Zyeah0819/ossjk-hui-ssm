@@ -14,5 +14,8 @@
     <sql id="Base_Column_List">
 		id, roleName, remarks, crtm, mdtm
 	</sql>
-
+    <!--查询role表的所有数据-->
+    <select id="selectAll" resultType="com.ossjk.ossjkssm.system.entity.Role">
+        select * from role r
+    </select>
 </mapper>

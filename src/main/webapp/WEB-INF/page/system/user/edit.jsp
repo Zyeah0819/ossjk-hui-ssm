@@ -46,6 +46,30 @@
 						</div>
 					</div>
 					<div class="row clearfix">
+						<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>部门：</label>
+						<div class="formControls col-xs-8 col-sm-9">
+                            <%--提交上去的是ogid，然后sql语句进行操作执行--%>
+							<select id="ogid" name="ogid" class="input-text">
+								<c:if test="${requestScope.organizations ne null }">
+									<c:forEach items="${requestScope.organizations}" var="organization">
+										<option value="${organization.id}" ${requestScope.record.ogid eq organization.id?"selected":"" }>${organization.organizationName}</option>
+									</c:forEach>
+								</c:if>
+							</select>
+						</div>
+					</div><div class="row clearfix">
+					<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>角色：</label>
+					<div class="formControls col-xs-8 col-sm-9">
+						<select id="rid" name="rid" class="input-text">
+							<c:if test="${requestScope.roles ne null }">
+								<c:forEach items="${requestScope.roles}" var="role">
+									<option value="${role.id}" ${requestScope.record.rid eq role.id?"selected":"" }>${role.roleName}</option>
+								</c:forEach>
+							</c:if>
+						</select>
+					</div>
+				</div>
+					<div class="row clearfix">
 						<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>手机：</label>
 						<div class="formControls col-xs-8 col-sm-9">
 							<input type="text" class="input-text" value="${requestScope.record.phone }" placeholder="" id="phone" name="phone">

@@ -26,6 +26,7 @@ public class DictionaryContrller extends BaseController {
      */
     @RequestMapping("/list")
     public String list(String dkey,Page page, ModelMap map) {
+        map.put("dkey", dkey);
         map.put("page", dictionaryService.selectPage(page,dkey));
         return "system/dictionary/list";
     }
@@ -79,7 +80,6 @@ public class DictionaryContrller extends BaseController {
     @RequestMapping("/delete")
     @ResponseBody
     public Object delete(Integer id) {
-        /*int i = 1 / 0;*/
         if (dictionaryService.deleteByPrimaryKey(id) > 0) {
             return new AjaxReturn(Constant.RETURN_CODE_SUCCESS, Constant.RETURN_MESSAGE_SUCCESS);
         } else {

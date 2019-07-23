@@ -23,7 +23,7 @@ public class User extends BaseEntity {
 
 	private String email;
 
-	private String logintime;
+	private Date logintime;
 
 	private String loginip;
 
@@ -114,12 +114,12 @@ public class User extends BaseEntity {
 		this.email = email == null ? null : email.trim();
 	}
 
-	public String getLogintime() {
+	public Date getLogintime() {
 		return logintime;
 	}
 
-	public void setLogintime(String logintime) {
-		this.logintime = logintime == null ? null : logintime.trim();
+	public void setLogintime(Date logintime) {
+		this.logintime = logintime;
 	}
 
 	public String getLoginip() {

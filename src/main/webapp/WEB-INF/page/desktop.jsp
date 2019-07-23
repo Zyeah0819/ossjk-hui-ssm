@@ -14,7 +14,7 @@
 					<p class="f-20 text-success">
 						欢迎使用OSSJK管理后台<span class="f-14">v1.1</span>
 					</p>
-					<p>上次登录IP：${sessionScope.assetuser.loginip } 上次登录时间：${sessionScope.assetuser.logintime }</p>
+					<p>上次登录IP：${sessionScope.assetuser.loginip } 上次登录时间：${sessionScope.user.logintime }</p>
 					<table class="table table-border table-bordered table-bg mt-20">
 						<thead>
 							<tr>
