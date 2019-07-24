@@ -73,6 +73,9 @@
             <if test="username!=null and username!=''">
                 AND username LIKE CONCAT('%',#{username},'%')
             </if>
+			<if test="ogid!=null and ogid!=''">
+				AND ogid = #{ogid}
+			</if>
         </trim>
 	</select>
 

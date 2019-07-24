@@ -28,9 +28,9 @@ public class UserServiceImpl extends BaseServiceImpl<UserMapper, User> implement
 
 
     @Override
-	public Page<User> selectPage(Page page,String username) {
+	public Page<User> selectPage(Page page,String username,Integer ogid) {
 		PageHelper.startPage(page.getPageNum(), page.getPageSize());
-		page.toPage(new PageInfo(baseMapper.selectAll(username)));
+		page.toPage(new PageInfo(baseMapper.selectAll(username,ogid)));
 		return page;
 	}
 

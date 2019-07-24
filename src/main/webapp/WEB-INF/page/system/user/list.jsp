@@ -20,6 +20,8 @@
 									<span class="col-xs-2 form-item-label">部门:</span>
 									<span class="col-xs-4 form-item-control">
 										<select id="ogid" name="ogid" class="input-text">
+											<%--下面没有value="${organization.id}"会报类型错误--%>
+											<option value="${organization.id}">--请选择--</option>
 											<c:if test="${requestScope.organizations ne null }">
 												<c:forEach items="${requestScope.organizations}" var="organization">
 													<option value="${organization.id}" ${requestScope.ogid eq organization.id?"selected":"" }>${organization.organizationName}</option>

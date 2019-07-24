@@ -32,7 +32,7 @@ public interface UserMapper extends BaseMapper<User> {
     There is no getter for property named 'name' in 'class java.lang.String'
     如果出现以上报错，那就是没有加注解@Param(value = "name")。
     */
-	List<User> selectAll(@Param(value = "username") String username);
+	List<User> selectAll(@Param(value = "username") String username,@Param(value = "ogid") Integer ogid);
 
 	/**
 	 * 根据id，批量删除数据

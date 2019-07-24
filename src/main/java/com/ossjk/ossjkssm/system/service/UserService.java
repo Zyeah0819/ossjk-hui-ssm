@@ -29,7 +29,7 @@ public interface UserService extends BaseService<User> {
 	 * @param username
 	 * @return
 	 */
-	Page<User> selectPage(Page page,String username);
+	Page<User> selectPage(Page page,String username,Integer ogid);
 
 	/**
 	 * 批量删除

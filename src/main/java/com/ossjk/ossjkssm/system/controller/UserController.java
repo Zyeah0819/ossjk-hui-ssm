@@ -41,7 +41,7 @@ public class UserController extends BaseController {
 		map.put("username", username);
 		map.put("ogid", ogid);
 		map.put("organizations",organizationService.selectAll());
-		map.put("page", userService.selectPage(page,username));
+		map.put("page", userService.selectPage(page,username,ogid));
 		return "system/user/list";
 	}
 
