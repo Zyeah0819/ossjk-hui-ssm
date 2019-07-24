@@ -36,9 +36,11 @@ public class UserController extends BaseController {
 	 * 列表
 	 */
 	@RequestMapping("/list")
-	public String list(String username,Page page, ModelMap map) {
+	public String list(String username,Integer ogid,Page page, ModelMap map) {
 		//搜索条件回显
 		map.put("username", username);
+		map.put("ogid", ogid);
+		map.put("organizations",organizationService.selectAll());
 		map.put("page", userService.selectPage(page,username));
 		return "system/user/list";
 	}

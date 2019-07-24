@@ -15,7 +15,17 @@
 						<div class="row clearfix">
 							<div class="col-xs-12 col-sm-6 col-md-4">
 								<div class="row clearfix mb-10">
-									<span class="col-xs-3 form-item-label">姓名：</span> <span class="col-xs-8 form-item-control"> <input type="text" name="username"   value="${requestScope.username }" placeholder="" class="input-text" />
+									<span class="col-xs-2 form-item-label">姓名:</span> <span class="col-xs-4 form-item-control"> <input type="text" name="username"   value="${requestScope.username }" placeholder="" class="input-text" />
+									</span>
+									<span class="col-xs-2 form-item-label">部门:</span>
+									<span class="col-xs-4 form-item-control">
+										<select id="ogid" name="ogid" class="input-text">
+											<c:if test="${requestScope.organizations ne null }">
+												<c:forEach items="${requestScope.organizations}" var="organization">
+													<option value="${organization.id}" ${requestScope.ogid eq organization.id?"selected":"" }>${organization.organizationName}</option>
+												</c:forEach>
+											</c:if>
+										</select>
 									</span>
 								</div>
 							</div>
