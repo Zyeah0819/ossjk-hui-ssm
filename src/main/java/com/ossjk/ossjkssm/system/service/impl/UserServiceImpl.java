@@ -1,6 +1,7 @@
 package com.ossjk.ossjkssm.system.service.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
@@ -26,13 +27,20 @@ public class UserServiceImpl extends BaseServiceImpl<UserMapper, User> implement
         return baseMapper.loginipAndtime(username,loginip);
     }
 
+	@Override
+	public Page<User> selectPage(Page page, Map map) {
+		PageHelper.startPage(page.getPageNum(), page.getPageSize());
+		page.toPage(new PageInfo(baseMapper.selectAll(map)));
+		return page;
+	}
 
-    @Override
+
+/*	@Override
 	public Page<User> selectPage(Page page,String username,Integer ogid) {
 		PageHelper.startPage(page.getPageNum(), page.getPageSize());
 		page.toPage(new PageInfo(baseMapper.selectAll(username,ogid)));
 		return page;
-	}
+	}*/
 
 	@Override
 	public int batchDelete(Integer[] ids) {

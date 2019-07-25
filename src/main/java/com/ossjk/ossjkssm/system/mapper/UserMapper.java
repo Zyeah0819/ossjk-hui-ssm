@@ -1,6 +1,7 @@
 package com.ossjk.ossjkssm.system.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import com.ossjk.core.base.mapper.BaseMapper;
 import com.ossjk.ossjkssm.system.entity.User;
@@ -32,7 +33,14 @@ public interface UserMapper extends BaseMapper<User> {
     There is no getter for property named 'name' in 'class java.lang.String'
     如果出现以上报错，那就是没有加注解@Param(value = "name")。
     */
-	List<User> selectAll(@Param(value = "username") String username,@Param(value = "ogid") Integer ogid);
+/*	List<User> selectAll(@Param(value = "username") String username,@Param(value = "ogid") Integer ogid);*/
+
+	/**
+	 * 查询user表数据，用map函数
+	 * @param map
+	 * @return
+	 */
+	List<User> selectAll(Map map);
 
 	/**
 	 * 根据id，批量删除数据

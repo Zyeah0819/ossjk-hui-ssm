@@ -1,6 +1,7 @@
 package com.ossjk.ossjkssm.system.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.github.pagehelper.PageInfo;
 import com.ossjk.core.base.service.BaseService;
@@ -29,7 +30,15 @@ public interface UserService extends BaseService<User> {
 	 * @param username
 	 * @return
 	 */
-	Page<User> selectPage(Page page,String username,Integer ogid);
+/*	Page<User> selectPage(Page page,String username,Integer ogid);*/
+
+	/**
+	 * 用map函数传参查询
+	 * @param page
+	 * @param map
+	 * @return
+	 */
+	Page<User> selectPage(Page page, Map map);
 
 	/**
 	 * 批量删除

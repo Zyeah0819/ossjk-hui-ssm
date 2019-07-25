@@ -21,6 +21,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.util.HashMap;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/system/user")
@@ -36,12 +38,17 @@ public class UserController extends BaseController {
 	 * 列表
 	 */
 	@RequestMapping("/list")
-	public String list(String username,Integer ogid,Page page, ModelMap map) {
+	public String list(String username, Integer ogid, Page page, ModelMap map) {
 		//搜索条件回显
 		map.put("username", username);
 		map.put("ogid", ogid);
 		map.put("organizations",organizationService.selectAll());
-		map.put("page", userService.selectPage(page,username,ogid));
+		/*map.put("page", userService.selectPage(page,username,ogid));*/
+		//换成hashmap会省掉很多代码
+		Map mp = new HashMap();
+		mp.put("username", username);
+		mp.put("ogid", ogid);
+		map.put("page", userService.selectPage(page,mp));
 		return "system/user/list";
 	}
 
