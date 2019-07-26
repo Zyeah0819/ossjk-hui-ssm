@@ -22,7 +22,14 @@ public interface UserService extends BaseService<User> {
      * @param loginip
      * @return
      */
-	int loginipAndtime(String username,String loginip);
+/*	int loginipAndtime(String username,String loginip);*/
+
+	/**
+	 * 登录时间和ip，map实现
+	 * @param map
+	 * @return
+	 */
+	int loginipAndtime(Map map);
 
 	/**分页显示数据，带查询条件
 	 *

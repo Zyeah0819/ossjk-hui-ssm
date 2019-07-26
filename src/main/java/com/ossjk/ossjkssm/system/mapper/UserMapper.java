@@ -22,7 +22,14 @@ public interface UserMapper extends BaseMapper<User> {
      * @param loginip
      * @return
      */
-	int loginipAndtime(@Param(value = "username") String username,@Param(value = "loginip") String loginip);
+/*	int loginipAndtime(@Param(value = "username") String username,@Param(value = "loginip") String loginip);*/
+
+	/**
+	 * 记录登录时间和ip
+	 * @param map
+	 * @return
+	 */
+	int loginipAndtime(Map map);
 
 	/**
 	 * 查询user表数据，带条件
@@ -36,7 +43,7 @@ public interface UserMapper extends BaseMapper<User> {
 /*	List<User> selectAll(@Param(value = "username") String username,@Param(value = "ogid") Integer ogid);*/
 
 	/**
-	 * 查询user表数据，用map函数
+	 * 查询user表数据，用map函数，以后添加属性的时候改代码会很方便
 	 * @param map
 	 * @return
 	 */

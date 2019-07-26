@@ -21,11 +21,18 @@ public class UserServiceImpl extends BaseServiceImpl<UserMapper, User> implement
 		return baseMapper.selectByName(username);
 	}
 
+	@Override
+	public int loginipAndtime(Map map) {
+		return baseMapper.loginipAndtime(map);
+	}
 
-    @Override
+
+/*
+	@Override
     public int loginipAndtime(String username, String loginip) {
         return baseMapper.loginipAndtime(username,loginip);
     }
+*/
 
 	@Override
 	public Page<User> selectPage(Page page, Map map) {

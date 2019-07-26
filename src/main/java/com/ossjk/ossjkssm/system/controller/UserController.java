@@ -44,7 +44,7 @@ public class UserController extends BaseController {
 		map.put("ogid", ogid);
 		map.put("organizations",organizationService.selectAll());
 		/*map.put("page", userService.selectPage(page,username,ogid));*/
-		//换成hashmap会省掉很多代码
+		//换成hashmap会省掉很多代码，利用反射的机制把值赋进去
 		Map mp = new HashMap();
 		mp.put("username", username);
 		mp.put("ogid", ogid);

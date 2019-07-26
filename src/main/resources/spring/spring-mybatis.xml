@@ -70,6 +70,7 @@
 
 	<tx:advice id="txAdvice" transaction-manager="transactionManager">
 		<tx:attributes>
+            <!-- 事务控制的方式 不限方法 事务级别：REQUIRED 回滚：抛Exception异常 -->
 			<tx:method name="delete*" propagation="REQUIRED" read-only="false" rollback-for="java.lang.Exception" />
 			<tx:method name="insert*" propagation="REQUIRED" read-only="false" rollback-for="java.lang.Exception" />
 			<tx:method name="update*" propagation="REQUIRED" read-only="false" rollback-for="java.lang.Exception" />
@@ -81,6 +82,7 @@
 	<aop:config>
 		<aop:pointcut id="pc" expression="execution(* com.ossjk.ossjkssm.*.service..*(..))" />
 		<aop:advisor pointcut-ref="pc" advice-ref="txAdvice" />
+       <!-- <aop:aspect></aop:aspect>-->
 	</aop:config>
 </beans> 
 

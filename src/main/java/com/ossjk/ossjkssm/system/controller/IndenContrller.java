@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.util.HashMap;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/system")
@@ -125,8 +127,11 @@ public class IndenContrller extends BaseController {
 		if (!CommonUtil.isBlank(user)) {
 			if (CommonUtil.isEquals(user.getPwd(), pwd)) {
 				//记录上一次登录的时间和ip
-				userService.loginipAndtime(username,ip);
-				System.out.println("ip"+ip);
+				Map mp = new HashMap();
+				mp.put("username",username);
+				mp.put("ip",ip);
+				userService.loginipAndtime(mp);
+				logger.debug("登录的ip地址是："+ip+"     登录的用户是："+username);
 				session.setAttribute(Constant.SESSION_USER_KEY, user);
 				return "redirect:/system/toIndex.do";
 			} else {
