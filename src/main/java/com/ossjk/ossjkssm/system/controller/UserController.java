@@ -38,7 +38,7 @@ public class UserController extends BaseController {
 	 * 列表
 	 */
 	@RequestMapping("/list")
-	public String list(String username, Integer ogid, Page page, ModelMap map) {
+	public String list(String username ,Integer ogid, Page page, ModelMap map) {
 		//搜索条件回显
 		map.put("username", username);
 		map.put("ogid", ogid);

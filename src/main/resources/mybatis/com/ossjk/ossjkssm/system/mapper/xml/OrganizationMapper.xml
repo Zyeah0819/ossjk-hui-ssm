@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.ossjk.ossjkssm.system.mapper.OrganizationMapper">
+    <!---->
     <resultMap id="BaseResultMap" type="com.ossjk.ossjkssm.system.entity.Organization">
         <!--
                 column 是对应数据库中表的字段名称 property是对应的bean里面的属性名称
@@ -19,5 +20,53 @@
     <select id="selectAll" resultType="com.ossjk.ossjkssm.system.entity.Organization">
         select * from organization o
     </select>
+    <!--分页显示查询-->
+    <select id="selectPage" resultType="com.ossjk.ossjkssm.system.entity.Organization">
+        select * from organization o
+        <trim prefix="where" prefixOverrides="and|or">
+            <if test="organizationName!=null and organizationName!=''">
+              and organizationName LIKE CONCAT('%',#{organizationName},'%')
+            </if>
+        </trim>
+    </select>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List" />
+        from organization
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+
+
+    <!--编辑信息-->
+    <!--now()表示的是修改时间-->
+    <update id="updateByPrimaryKey" parameterType="com.ossjk.ossjkssm.system.entity.Organization">
+		update organization
+		set organizationName = #{organizationName,jdbcType=VARCHAR},
+		sort = #{sort,jdbcType=VARCHAR},
+		mdtm = NOW()
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+
+    <!--删除数据-->
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from organization
+		where id = #{id,jdbcType=INTEGER}
+	</delete>
+
+    <!--   添加数据   -->
+    <!--now()表示的是创建时间-->
+    <insert id="insert" parameterType="com.ossjk.ossjkssm.system.entity.Organization">
+		insert into organization ( organizationName, sort,crtm)
+		values (#{organizationName,jdbcType=INTEGER}, #{sort,jdbcType=INTEGER},now())
+	</insert>
+
+
+    <!-- 批量删除 -->
+    <delete id="batchDelete">
+        delete from organization where id in
+        <foreach collection="array" item="id" index="no" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
 
 </mapper>

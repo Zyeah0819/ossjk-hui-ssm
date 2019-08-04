@@ -37,5 +37,16 @@
 		<property name="maxInMemorySize" value="40960" />
 	</bean>
 
-
+	<!--配置拦截器-->
+	<mvc:interceptors>
+		<!--配置登录拦截器-->
+		<mvc:interceptor>
+			<mvc:mapping path="/**"/>
+			<!--第一次的登录不拦截，如果不加下面这个，第一次也会被拦截报错，这不是我们想要的-->
+			<mvc:exclude-mapping path="/system/toLogin.do" />
+			<!--排除-->
+			<!--<mvc:exclude-mapping path=""-->
+			<bean class="com.ossjk.ossjkssm.system.interceptor.LoginInterceptor"/>
+		</mvc:interceptor>
+	</mvc:interceptors>
 </beans>

@@ -13,7 +13,8 @@
 <body>
 
 	<jk:menu>
-			[{
+		[
+			{
 				"name": "系统管理",
 				"icon": "&#xe62e;",
 				"child": [
@@ -25,9 +26,31 @@
 							"name": "数据字典",
 							"href": "${pageContext.request.contextPath}/system/dictionary/list.do"
 						}
+						{
+							"name": "组织机构",
+							"href": "${pageContext.request.contextPath}/system/organization/list.do"
+						}
 				]
-			
-			}]
+			}
+			{
+				"name": "设备管理",
+				"icon": "&#xe62e;",
+				"child": [
+				{
+					"name": "用户管理",
+					"href": "${pageContext.request.contextPath}/system/user/list.do"
+				}
+				{
+					"name": "数据字典",
+					"href": "${pageContext.request.contextPath}/system/dictionary/list.do"
+				}
+				{
+					"name": "组织机构",
+					"href": "${pageContext.request.contextPath}/system/organization/list.do"
+				}
+				]
+			}
+		]
 	</jk:menu>
 	<div class="Hui-admin-aside-mask"></div>
 	<div class="Hui-admin-dislpayArrow">

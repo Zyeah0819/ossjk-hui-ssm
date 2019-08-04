@@ -15,11 +15,16 @@
 <title>OSSJK管理后台 v1.1</title>
 </head>
 <body>
-	<input type="hidden" id="TenantId" name="TenantId" value="" />
+<%--<script>
+	var message="<%=request.getAttribute("message")%>"
+	alert(message);
+</script>--%>
 	<div class="header"></div>
+	<div><input type="hidden" name="field＿name" value=""></div>
 	<div class="loginWraper">
 		<div id="loginform" class="loginBox">
-			<form id="form" class="form form-horizontal" action="${pageContext.request.contextPath}/system//login.do" method="post">
+			<form id="form" class="form form-horizontal" action="${pageContext.request.contextPath}/system/login.do" method="post">
+
 				<div class="row clearfix">
 					<label class="form-label col-xs-3"><i class="Hui-iconfont">&#xe60d;</i></label>
 					<div class="form-controls col-xs-8">
@@ -40,6 +45,8 @@
 				<div class="row clearfix">
 					<div class="formControls col-xs-8 col-xs-offset-3">
 						<label for="online" style="color: red"> ${requestScope.msg }</label>
+						<label for="online" style="color: red"> ${requestScope.message }</label>
+
 					</div>
 				</div>
 			</form>
