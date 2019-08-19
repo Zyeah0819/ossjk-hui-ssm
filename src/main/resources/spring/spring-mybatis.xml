@@ -1,5 +1,9 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p" xmlns:context="http://www.springframework.org/schema/context" xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx" xmlns:util="http://www.springframework.org/schema/util" xsi:schemaLocation="http://www.springframework.org/schema/beans
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:p="http://www.springframework.org/schema/p" xmlns:context="http://www.springframework.org/schema/context"
+	   xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	   xmlns:util="http://www.springframework.org/schema/util"
+	   xmlns:cont="http://www.springframework.org/schema/context" xsi:schemaLocation="http://www.springframework.org/schema/beans
     http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
     http://www.springframework.org/schema/context
     http://www.springframework.org/schema/context/spring-context-4.0.xsd
@@ -9,6 +13,11 @@
     http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
     http://www.springframework.org/schema/util
     http://www.springframework.org/schema/util/spring-util-4.0.xsd">
+
+	<cont:component-scan base-package="com.ossjk.ossjkssm.system">
+		<!--配置哪些注解不扫描-->
+		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller" />
+	</cont:component-scan>
 
 	<!-- 读入配置属性文件 -->
 	<context:property-placeholder location="classpath:jdbc.properties" />
@@ -53,6 +62,7 @@
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
 		<!-- 自动扫描mapping.xml文件 -->
+
 		<property name="mapperLocations" value="classpath:mybatis/com/ossjk/ossjkssm/*/mapper/xml/*.xml"></property>
 		<property name="configLocation" value="classpath:mybatis/mybatis-conf.xml" />
 	</bean>
@@ -77,12 +87,28 @@
 			<tx:method name="batch*" propagation="REQUIRED" read-only="false" rollback-for="java.lang.Exception" />
 		</tx:attributes>
 	</tx:advice>
+
+
+    <!--配置切面类，注解-->
+    <bean id="MyAspect" class="com.ossjk.ossjkssm.system.aspect.WebLogAspect"></bean>
+	<!--xml配置-->
+    <bean id="MyAspect1" class="com.ossjk.ossjkssm.system.aspect.WebLogAspect1"></bean>
+	<!--确定AOP注解生效-->
 	<aop:aspectj-autoproxy proxy-target-class="true" />
 	<!-- 事务处理 -->
 	<aop:config>
 		<aop:pointcut id="pc" expression="execution(* com.ossjk.ossjkssm.*.service..*(..))" />
 		<aop:advisor pointcut-ref="pc" advice-ref="txAdvice" />
-       <!-- <aop:aspect></aop:aspect>-->
+<!--		&lt;!&ndash;基于注解的实现&ndash;&gt;
+		<aop:aspect ref="MyAspect"></aop:aspect>-->
+
+
+		<!--基于xml的日志输出-->
+        <aop:aspect ref="MyAspect1">
+			<aop:pointcut id="pc" expression="execution(* com.ossjk.ossjkssm.*.service..*(..))" />
+			<aop:before method="doBefore" pointcut-ref="pc"></aop:before>
+			<aop:after-returning method="doAfterReturning" returning="ret" pointcut-ref="pc"></aop:after-returning>
+		</aop:aspect>
 	</aop:config>
 </beans> 
 

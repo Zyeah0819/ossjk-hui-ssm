@@ -11,6 +11,7 @@ public class Dictionary extends BaseEntity {
     private String dkey;
     private String dvalue;
     /*@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss" ,timezone = "GMT+8")*/
+
     private Date crtm;
     private Date mdtm;
 

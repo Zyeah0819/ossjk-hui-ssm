@@ -25,12 +25,21 @@
 		<setting name="lazyLoadTriggerMethods" value="equals,clone,hashCode,toString" />
 	</settings>
 
-<!--	<typeAliases>
-		&lt;!&ndash;这里给实体类取别名，方便在mapper配置文件中使用&ndash;&gt;
-		<package name="cn.bdqn.pojo"/>
-	</typeAliases>-->
+	<typeAliases>
+		<!--这里给实体类取别名，方便在mapper配置文件中使用,就可以不用写全名-->
+		<package name="com.ossjk.ossjkssm.system.entity"/>
+	</typeAliases>
+<!--	告诉mybatis加载映射文件
+	<mappers>
+		<mapper resource="com/gyf/backoffice/sqlmap/User.xml"></mapper>
+		&lt;!&ndash;第三种：可以写包名&ndash;&gt;
 
+		&lt;!&ndash; 包配置只适用于mapper代理
+        加载映射接口和配置文件
+        &ndash;&gt;
+		<package name="com.gyf.backoffice.mapper"></package>
 
+	</mappers>-->
 
 
 	<!-- 配置PageHelper拦截器插件 -->

@@ -6,6 +6,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.awt.*;
+import java.util.logging.Logger;
 
 public class LoginInterceptor implements HandlerInterceptor {
     @Override
@@ -25,6 +26,7 @@ public class LoginInterceptor implements HandlerInterceptor {
 
         //3.进入到login页面
         request.setAttribute("message", "请先登录再访问网站");
+		//请求转发
         request.getRequestDispatcher("/WEB-INF/page/login.jsp").forward(request,response);
 
         return false;

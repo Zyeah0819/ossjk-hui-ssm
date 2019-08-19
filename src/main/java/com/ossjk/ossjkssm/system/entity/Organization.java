@@ -1,6 +1,8 @@
 package com.ossjk.ossjkssm.system.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.ossjk.core.base.entity.BaseEntity;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 

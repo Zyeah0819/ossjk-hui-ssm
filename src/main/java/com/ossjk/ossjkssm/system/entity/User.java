@@ -36,7 +36,26 @@ public class User extends BaseEntity {
 
 	private String mdby;
 
-    public String getMdby() {
+	@Override
+	public String toString() {
+		return "User{" +
+				"rid=" + rid +
+				", ogid=" + ogid +
+				", username='" + username + '\'' +
+				", pwd='" + pwd + '\'' +
+				", sex=" + sex +
+				", birth='" + birth + '\'' +
+				", phone='" + phone + '\'' +
+				", email='" + email + '\'' +
+				", logintime=" + logintime +
+				", loginip='" + loginip + '\'' +
+				", organizationName='" + organizationName + '\'' +
+				", roleName='" + roleName + '\'' +
+				", mdby='" + mdby + '\'' +
+				'}';
+	}
+
+	public String getMdby() {
         return mdby;
     }
 

@@ -22,6 +22,7 @@
 	<div class="header"></div>
 	<div><input type="hidden" name="field＿name" value=""></div>
 	<div class="loginWraper">
+
 		<div id="loginform" class="loginBox">
 			<form id="form" class="form form-horizontal" action="${pageContext.request.contextPath}/system/login.do" method="post">
 

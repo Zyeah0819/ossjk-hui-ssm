@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ossjk.core.base.controller.BaseController;
@@ -16,11 +15,6 @@ import com.ossjk.ossjkssm.common.Constant;
 import com.ossjk.ossjkssm.system.entity.User;
 import com.ossjk.ossjkssm.system.service.UserService;
 
-import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-import java.net.InetAddress;
-import java.net.UnknownHostException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -38,7 +32,8 @@ public class UserController extends BaseController {
 	 * 列表
 	 */
 	@RequestMapping("/list")
-	public String list(String username ,Integer ogid, Page page, ModelMap map) {
+	public String list(String username ,Integer ogid, Page page, ModelMap map)  {
+
 		//搜索条件回显
 		map.put("username", username);
 		map.put("ogid", ogid);
